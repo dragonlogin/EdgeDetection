@@ -109,20 +109,21 @@ class check_num(object):
         elif cnt == 2:
             self.pro2(new_gray, index[:2])
 
-index = np.array([2,3,4])
-index = [2,3]
-new_gray = np.zeros((3,3), dtype=np.uint8)
+    def test(self):
+        index = np.array([2,3,4])
+        index = [2,3]
+        new_gray = np.zeros((3,3), dtype=np.uint8)
 
-ck = check_num()
-print(new_gray)
-ck.link_list_edge(new_gray, index)
-ret = ck.pro2(new_gray, index)
-print(new_gray)
-# print(ret)
-print(ck.pro3(new_gray, [2,3,4]))
-print(new_gray)
+        ck = check_num()
+        print(new_gray)
+        ck.link_list_edge(new_gray, index)
+        ret = ck.pro2(new_gray, index)
+        print(new_gray)
+        # print(ret)
+        print(ck.pro3(new_gray, [2,3,4]))
+        print(new_gray)
 
-# print(self.check45(index))
-# print(self.check01(index))
-# print(self.check_ij(3,4,index))
-# print(self.check_ij(2,3,index))
+        # print(self.check45(index))
+        # print(self.check01(index))
+        # print(self.check_ij(3,4,index))
+        # print(self.check_ij(2,3,index))

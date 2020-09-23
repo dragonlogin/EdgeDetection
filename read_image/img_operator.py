@@ -18,8 +18,11 @@ class img_operator:
         gray = np.array(gray)
         return gray
 
-    def showImg(self, title, gray):
+    def showImg(self, title, gray, is_wait = False):
         cv2.imshow(title, gray)
+
+        if is_wait == True:
+            cv2.waitKey(0)
 
     def showMat(self, mat):
         print('mat=\n{}'.format(mat))
