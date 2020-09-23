@@ -1,5 +1,5 @@
 ### EdgeDetection
-### 入口函数为main/main.py
+### 入口函数为main/main2.py
 - main 目录
     - main2.py ： 入口函数，一般用到的函数汇总
 -   matrix目录
