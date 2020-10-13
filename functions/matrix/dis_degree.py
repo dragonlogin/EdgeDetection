@@ -900,37 +900,37 @@ class dis_degree(object):
 
             cnt += 1
             # debug
-            print('x,y\t', x, '\t', y)
+            # print('x,y\t', x, '\t', y)
             x, y = self.find_local_max__(x, y, mat, d_mat, sho)
             if x == -1 and y == -1:
                 break
 
             save_st, end_p = self.start_with_point(x, y, mat, d_mat, 0)
-            print('save_st', save_st)
-            print('end_p', end_p)
+            # print('save_st', save_st)
+            # print('end_p', end_p)
 
             # 优化操作
-            # if save_st == []:
-            #     # x, y = end_p[0], end_p[1]
-            #     y += 1
-            #     continue
-            # # 优化操作
-            # if len(save_st) < 4:
-            #     # x, y = end_p[0], end_p[1]
-            #     y += 1
-            #     continue
-            # m_st, b_st = set(), set()
-            # for p_ in save_st:
-            #     if mat[p_[0]] < mat[p_[1]]:
-            #         m_st.add(p_[0])
-            #         b_st.add(p_[1])
-            #     else:
-            #         m_st.add(p_[1])
-            #         b_st.add(p_[0])
-            # # 优化操作
-            # if len(m_st) * 1.5 < len(b_st) or len(b_st) * 1.5 < len(m_st):
-            #     y += 1
-            #     continue
+            if save_st == []:
+                # x, y = end_p[0], end_p[1]
+                y += 1
+                continue
+            # 优化操作
+            if len(save_st) < 4:
+                # x, y = end_p[0], end_p[1]
+                y += 1
+                continue
+            m_st, b_st = set(), set()
+            for p_ in save_st:
+                if mat[p_[0]] < mat[p_[1]]:
+                    m_st.add(p_[0])
+                    b_st.add(p_[1])
+                else:
+                    m_st.add(p_[1])
+                    b_st.add(p_[0])
+            # 优化操作
+            if len(m_st) * 1.5 < len(b_st) or len(b_st) * 1.5 < len(m_st):
+                y += 1
+                continue
 
             sm, sb = self.show_edge_by_mat2_6_2(mat, save_st, small_mark_st, big_mark_st)
             bin_b_s += sm

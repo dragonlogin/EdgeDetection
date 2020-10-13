@@ -324,6 +324,51 @@ class tools(object):
                     binPic[i, j] = 255
         return binPic
 
+    def twoimgtoexcel(self, saveFile, origin, salt_after):
+        # 水平
+
+        wb = Workbook()
+        sheet = wb.active
+        h, w = origin.shape
+
+        fill1 = PatternFill("solid", fgColor="76EE00")  # 绿色
+        fill2 = PatternFill("solid", fgColor="EE7AE9")  # 粉红
+        fill3 = PatternFill("solid", fgColor="F0E68C")  # 淡黄色
+        # 原始数组元素
+        for i in range(h):
+            for j in range(w):
+                ki, kj = i + 1, j + 1
+                sheet.cell(ki, kj, str(origin[i, j]) + '/' + str(salt_after[i, j]))
+                if origin[i, j] != salt_after[i, j] :
+                    sheet.cell(ki, kj).fill = fill1 # 绿色
+
+
+        wb.save(saveFile + '.xlsx')
+        print("imgToexcel OK")
+
+    def threeimgtoexcel(self, saveFile, origin, salt_after, blur_after):
+        # 水平
+
+        wb = Workbook()
+        sheet = wb.active
+        h, w = origin.shape
+
+        fill1 = PatternFill("solid", fgColor="76EE00")  # 绿色
+        fill2 = PatternFill("solid", fgColor="EE7AE9")  # 粉红
+        fill3 = PatternFill("solid", fgColor="F0E68C")  # 淡黄色
+        # 原始数组元素
+        for i in range(h):
+            for j in range(w):
+                ki, kj = i + 1, j + 1
+                sheet.cell(ki, kj, str(origin[i, j]) + '/' + str(salt_after[i, j]) + '/' + str(blur_after[i, j]))
+                if origin[i, j] != salt_after[i, j] :
+                    sheet.cell(ki, kj).fill = fill1 # 绿色
+
+
+        wb.save(saveFile + '.xlsx')
+        print("imgToexcel OK")
+
+
     def imgToExcel_bsm(self, saveFile, mark, origin=[], ourimg=[], ground=[]):
         # 水平
 

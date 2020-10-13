@@ -374,7 +374,7 @@ class DDTest(object):
         '''
         给图像添加噪声
         '''
-        # gray = an.addSaltNoise(gray, 0.99)
+        gray = an.addSaltNoise(gray, 0.99)
         # cv2.imshow('origin_salt_noise', gray)
 
         # gray = an.GaussianNoise(gray, 0, 0.1, 8)
@@ -415,6 +415,7 @@ class DDTest(object):
         bin = dd.link_edge_all_mat_by_chabian(gray, 10)
         bin = self.repair_bin(bin)
         tl.drawBinPicByChabian('my_algo', bin)
+
         '''
         F seasure
         '''
