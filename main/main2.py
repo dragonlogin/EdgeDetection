@@ -5,6 +5,7 @@ from read_image.image_path import  image_path
 from image_enhance.ima_enhance import ima_enhance
 from tools.tools import tools
 from functions.add_noise.add_noise import add_noise
+from image_enhance.paper import paper
 an = add_noise()
 import cv2
 ie = ima_enhance()
@@ -13,7 +14,7 @@ inter = interference()
 io = img_operator()
 igpath = image_path()
 tl = tools()
-
+pp = paper()
 class main2(object):
 
     # 获取输入图像
@@ -88,6 +89,26 @@ class main2(object):
         #     gray = r_mat2
         # io.showImg('gaussian_median', r_mat2)
 
+    def test_salt_noise_wanfengfeng(self, mat, num=1):
+        gray = an.addSaltNoise(mat, 0.4)
+        # salt_after = gray - mat
+        salt_after = gray
+        tl.twoimgtoexcel('./sources/' + 'salt_after', mat, salt_after)
+        cv2.imshow('origin_salt_noise', gray)
+
+        wf_blur = pp.wanfeng(gray, 10, 30)
+        cv2.imshow('wf_blur', wf_blur)
+
+
+        '''
+        SMF
+        '''
+        cv2_img_salt_median = cv2.medianBlur(gray, 5)
+        # tl.threeimgtoexcel('./sources/' + 'cv2_img_salt_median', mat, salt_after, cv2_img_salt_median)
+        io.showImg('cv2_salt_median', cv2_img_salt_median)
+
+
+
     def test_gaussian_noise(self, mat, num = 1):
 
         # gray = an.addSaltNoise(mat, 0.9)
@@ -153,6 +174,7 @@ if __name__ == '__main__':
     # can = obj.canny_algo(r_mat2)
     # io.showImg('canny_mean', can, True)
 
-    obj.test_salt_noise(ori_mat, 1)
+    # obj.test_salt_noise(ori_mat, 1)
+    obj.test_salt_noise_wanfengfeng(ori_mat)
     cv2.waitKey(0)
 

@@ -8,8 +8,8 @@ class image_path:
         # return '../image/8068.jpg' # 天鹅
         # return '../image/qie.jpg' # 部分企鹅图片
 
-        return '../image/leaf.jpg'
-        # return '../image/lena.jpg'
+        # return '../image/leaf.jpg'
+        return '../image/lena.jpg'
 
         # return '../image/house.jpg'
         # return '../BSDS500/data/images/train/35008.jpg'
