@@ -1,7 +1,3 @@
-import os
-import cv2
-# import matplotlib.pyplot as plt
-import numpy as np
 
 class measure:
     def F(self, gt, my_bin):
