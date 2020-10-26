@@ -140,6 +140,42 @@ class enhance_unit(object):
         return lists, addr
 
 
+    def partition_list(self, lists, x, y, num=8):
+        # lists, _ = self.point_list(gray, x, y, num)
+        # _, index = self.lockNoise(gray, x, y, num)
+        # print("\nnoiseList={}\t noiseIndex={}".format(lists, index))
+        A, B = [], []
+        ariseIndex, decIndex = -1, -1
+        ariseMax, decMin = 0, 0
+        diff = 0
+        # if index == None:
+        #     diff = 0
+        #     return diff
+        # del lists[index]
+        lens = len(lists)
+        for i in range(lens):
+            sub = int(lists[(i + 1) % lens]) - int(lists[i])
+            # print("sub={}".format(sub))
+            if sub > 0 and sub > ariseMax:
+                ariseMax, ariseIndex = sub, i
+            elif sub < 0 and sub < decMin:
+                decMin, decIndex = sub, i
+        # print("av={}\tai={}".format(ariseMax, ariseIndex))
+        # print("dv={}\tdi={}".format(decMin, decIndex))
+        minIndex, maxIndex = min(ariseIndex, decIndex), max(ariseIndex, decIndex)
+        for i in range(lens):
+            if minIndex < i <= maxIndex:
+                B.append(lists[i])
+            else:
+                A.append(lists[i])
+
+        # print("A={}\tB={}".format(A,B))
+        # np.std([1, 2, 3], ddof=1)
+        # 修正一下，一个数的标准差，调用函数为 nan, 应该为 0
+        # 修正一下， 空列表的平均数为 0, 直接调用函数为 nan
+        # VA, VB = np.mean(A), np.mean(B)
+
+        return A, B
 
     def partitionAB(self, gray, x, y, num=8):
         lists, _ = self.point_list(gray, x, y, num)

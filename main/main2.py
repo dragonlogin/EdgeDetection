@@ -6,6 +6,13 @@ from image_enhance.ima_enhance import ima_enhance
 from tools.tools import tools
 from functions.add_noise.add_noise import add_noise
 from image_enhance.paper import paper
+
+from image_enhance.t_10_21 import TL
+ta = TL()
+
+from image_enhance.paper import paper_foma
+foma = paper_foma()
+
 an = add_noise()
 import cv2
 ie = ima_enhance()
@@ -90,7 +97,7 @@ class main2(object):
         # io.showImg('gaussian_median', r_mat2)
 
     def test_salt_noise_wanfengfeng(self, mat, num=1):
-        gray = an.addSaltNoise(mat, 0.4)
+        gray = an.addSaltNoise(mat, 0.03)
         # salt_after = gray - mat
         salt_after = gray
         tl.twoimgtoexcel('./sources/' + 'salt_after', mat, salt_after)
@@ -99,6 +106,11 @@ class main2(object):
         wf_blur = pp.wanfeng(gray, 10, 30)
         cv2.imshow('wf_blur', wf_blur)
 
+        '''
+        2020-foma论文
+        '''
+        foma_blur = foma.foma(mat)
+        cv2.imshow('foma_blur', foma_blur)
 
         '''
         SMF
@@ -107,7 +119,25 @@ class main2(object):
         # tl.threeimgtoexcel('./sources/' + 'cv2_img_salt_median', mat, salt_after, cv2_img_salt_median)
         io.showImg('cv2_salt_median', cv2_img_salt_median)
 
+    def test_salt_noise_2020_foma(self, mat):
+        gray = an.addSaltNoise(mat, 0.4)
+        # salt_after = gray - mat
+        salt_after = gray
+        # tl.twoimgtoexcel('./sources/' + 'salt_after', mat, salt_after)
+        cv2.imshow('origin_salt_noise', gray)
 
+        '''
+        2020-foma论文
+        '''
+        foma_blur = foma.foma(mat)
+        cv2.imshow('foma_blur', foma_blur)
+
+        '''
+        SMF
+        '''
+        cv2_img_salt_median = cv2.medianBlur(gray, 5)
+        # tl.threeimgtoexcel('./sources/' + 'cv2_img_salt_median', mat, salt_after, cv2_img_salt_median)
+        io.showImg('cv2_salt_median', cv2_img_salt_median)
 
     def test_gaussian_noise(self, mat, num = 1):
 
@@ -175,6 +205,23 @@ if __name__ == '__main__':
     # io.showImg('canny_mean', can, True)
 
     # obj.test_salt_noise(ori_mat, 1)
+    '''
+        万丰丰论文实现
+    '''
     obj.test_salt_noise_wanfengfeng(ori_mat)
+
+    '''
+    2020-foma 论文实现
+    '''
+    # obj.test_salt_noise_2020_foma(ori_mat)
+
+    '''
+        10-21讨论实现
+    '''
+
+    # ret_mat = ta.t_10_21_all_mat(ori_mat)
+    # io.showImg('t_10_21', ret_mat)
+    # tl.twoimgtoexcel('./sources/' + 't_10_21', ori_mat, ret_mat)
+
     cv2.waitKey(0)
 

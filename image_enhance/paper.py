@@ -1,4 +1,5 @@
 import numpy as np
+import math
 class paper(object):
 
    def __init__(self):
@@ -130,7 +131,7 @@ class paper(object):
                     X[i, j] = F_10(i, j)
 
         # a[[1, 4]][:, [0, 3]]
-        return X[1 : h - 1][1 : w - 1]
+        return X[1 : h - 1, 1 : w - 1]
 
 
 
@@ -140,9 +141,217 @@ class paper(object):
 
 
 
+class paper_foma(object):
+    def __init__(self):
+        pass
+
+    '''
+    输入：mat, mat如果是3x3就是对3x3求，如果是5x5就是对5x5求
+    输出：一个值
+    '''
+    def TMF(self, mat):
+        h, w = mat.shape
+        num, ls = 0, []
+        for i in range(h):
+            for j in range(w):
+                pix = mat[i, j]
+                if 0 < pix < 255:
+                    num += 1
+                    ls.append(pix)
+
+        if num == 0:
+            return mat[h // 2, w // 2]
+        else:
+            return math.ceil(np.median(ls))
+
+    '''
+    输入：3x3 mat
+    输出：一个值
+    '''
+    def ARA(self, mat3):
+        i, j = 1, 1
+        cor = [(i - 1, j - 1), (i - 1, j), (i - 1, j + 1), (i, j - 1)]
+        sum = 0
+
+        for k in cor:
+            sum += mat3[k]
+
+        return math.ceil(sum // 4)
+
+    '''
+    预处理
+    输入：mat
+    输出：边缘填充两层的0
+    '''
+    def init(self, mat):
+        h, w = mat.shape
+        ret = np.zeros((h + 4, w + 4), dtype=np.uint8)
+        for i in range(h):
+            for j in range(w):
+                ret[i + 2, j + 2] = mat[i, j]
+
+        return ret
+
+    '''
+    判断一个点是否为疑似噪声点
+    输入：一个值
+    输出：True/False
+    '''
+    def is_noisy(self, val):
+        return False if 0 < val < 255 else True
+
+    '''
+    算法第一阶段
+    输入：一个含有椒盐噪声的 mat
+    输出：第一阶段后的图像 img1
+    '''
+    def step_one(self, dmat):
+        rimg1 = dmat.copy()
+        h, w = dmat.shape
+        h, w = h - 4, w - 4
+
+        # 阶段一
+        for i in range(h):
+            for j in range(w):
+                ni, nj = i + 2, j + 2
+
+                if self.is_noisy(dmat[ni, nj]) == False:
+                    continue
+
+                mat3 = dmat[ni - 1: ni + 2, nj - 1: nj + 2]
+                mat5 = dmat[ni - 2: ni + 3, nj - 2: nj + 3]
+                rtmf3 = self.TMF(mat3)
+                rtmf5 = self.TMF(mat5)
+
+                if 0 < rtmf3 < 255:
+                    rimg1[ni, nj] = rtmf3
+                else:
+                    rimg1[ni, nj] = rtmf5
+
+        return rimg1
+
+    '''
+    算法第二阶段
+    输入：第一阶段的 imag1
+    输出：第二阶段后的图像的 img2 
+    '''
+
+    def step_two(self, rimg1):
+        rimg2 = rimg1.copy()
+        h, w = rimg1.shape
+        h, w = h - 4, w - 4
+
+        for i in range(h):
+            for j in range(w):
+                ni, nj = i + 2, j + 2
+
+                if self.is_noisy(rimg1[ni, nj]) == False:
+                    continue
+
+                mat5 = rimg1[ni - 2: ni + 3, nj - 2: nj + 3]
+                rtmf5 = self.TMF(mat5)
+                rimg2[ni, nj] = rtmf5
+
+        return rimg2
+
+    '''
+    算法的第三阶段
+    输入：第二阶段的结果 rimg2
+    输出：第三阶段的结果 rimg3
+    '''
+    def step_three(self, rimg2):
+        rimg3 = rimg2.copy()
+        h, w = rimg2.shape
+        h, w = h - 4, w - 4
+
+        for i in range(h):
+            for j in range(w):
+                ni, nj = i + 2, j + 2
+
+                if self.is_noisy(rimg2[ni, nj]) == False:
+                    continue
+
+                mat3 = rimg2[ni - 1: ni + 2, nj - 1: nj + 2]
+                ara = self.ARA(mat3)
+                rimg3[ni, nj] = ara
+
+        return rimg3
+
+    '''
+    算法第四阶段：处理边界像素
+    输入：第三阶段的结果 rimg3
+    输出：第四阶段的结果 rimg4
+    '''
+    def step_four(self, rimg3):
+        h, w = rimg3.shape
+        return rimg3[2 : h - 2, 2 : w - 2]
+
+
+    '''
+    论文算法流程
+    输入：一个含有椒盐噪声的mat
+    输出：一个滤波后的mat
+    '''
+
+
+    def foma(self, mat):
+        # 待处理的 dmat
+        dmat = self.init(mat)
+
+        #第一阶段
+        rimg1 = self.step_one(dmat)
+        # 阶段二
+        rimg2 = self.step_two(rimg1)
+        # 阶段三
+        rimg3 = self.step_three(rimg2)
+
+        # 阶段四
+        rimg4 = self.step_four(rimg3)
+        return rimg4
 
 
 
+    def test(self):
+        ls = [1, 2, 3, 4, 5, 6, 7]
+        import math
+        m = math.ceil(np.median(ls))
+        print(m)
+
+    def test_foma(self):
+        mat = np.array([
+            [0, 0, 255, 255, 255, 0, 255],
+            [125, 127, 0, 255, 0, 255, 255],
+            [126, 127, 255, 0, 255, 0, 255],
+            [126, 129, 0, 255, 255, 0, 255],
+            [127, 129, 0, 255, 255, 0, 255]
+        ])
+
+        print('mat=\n{}\n'.format(mat))
+        #预处理
+        dmat = self.init(mat)
+        print('dmat=\n{}\n'.format(dmat))
+
+        # 第一阶段
+        rimg1 = self.step_one(dmat)
+        print('rimg1=\n{}\n'.format(rimg1))
+
+        # 第二阶段
+        rimg2 = self.step_two(rimg1)
+        print('rimg2=\n{}\n'.format(rimg2))
+
+        # 第三阶段
+        rimg3 = self.step_three(rimg2)
+        print('rimg3=\n{}\n'.format(rimg3))
+
+        # 第四阶段
+        rimg4 = self.step_four(rimg3)
+        print('rimg4=\n{}\n'.format(rimg4))
+
+        rimg4_foma = self.foma(mat)
+        print('rimg4_foma=\n{}\n'.format(rimg4_foma))
+
+
+# paper_foma().test_foma()
 
 
 
