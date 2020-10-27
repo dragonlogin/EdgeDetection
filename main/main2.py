@@ -6,13 +6,13 @@ from image_enhance.ima_enhance import ima_enhance
 from tools.tools import tools
 from functions.add_noise.add_noise import add_noise
 from image_enhance.paper import paper
-
+from functions.measure_method.measure import measure
 from image_enhance.t_10_21 import TL
 ta = TL()
-
+ms = measure()
 from image_enhance.paper import paper_foma
 foma = paper_foma()
-
+import numpy as np
 an = add_noise()
 import cv2
 ie = ima_enhance()
@@ -97,26 +97,66 @@ class main2(object):
         # io.showImg('gaussian_median', r_mat2)
 
     def test_salt_noise_wanfengfeng(self, mat, num=1):
-        gray = an.addSaltNoise(mat, 0.03)
+        # gray = an.addSaltNoise(mat, 0.9)
+        # gray = an.sp_noise(mat, 0.05)
+        gray = an.salt_and_pepper_noise(mat, 0.05)
         # salt_after = gray - mat
         salt_after = gray
-        tl.twoimgtoexcel('./sources/' + 'salt_after', mat, salt_after)
+        # tl.twoimgtoexcel('./sources/' + 'salt_after', mat, salt_after)
         cv2.imshow('origin_salt_noise', gray)
 
+        '''
+        万丰丰论文
+        '''
         wf_blur = pp.wanfeng(gray, 10, 30)
         cv2.imshow('wf_blur', wf_blur)
 
         '''
+        wff - PSNR
+        '''
+        psnr = ms.PSNR(mat, wf_blur)
+        print('wf_psnr={}\n'.format(psnr))
+
+        '''
+        wff - SSIM
+        '''
+        ssim = ms.compute_ssim(mat, wf_blur)
+        print('wff_ssim={}\n'.format(ssim))
+
+        '''
         2020-foma论文
         '''
-        foma_blur = foma.foma(mat)
+        foma_blur = foma.foma(gray)
         cv2.imshow('foma_blur', foma_blur)
+        '''
+        foma-PSNR
+        '''
+        psnr = ms.PSNR(foma_blur, mat)
+        print('foma_psnr={}\n'.format(psnr))
+
+        '''
+        foma-SSIM
+        '''
+        ssim = ms.compute_ssim(mat, foma_blur)
+        print('foma_ssim={}\n'.format(ssim))
 
         '''
         SMF
         '''
-        cv2_img_salt_median = cv2.medianBlur(gray, 5)
+        cv2_img_salt_median = cv2.medianBlur(gray, 3)
         # tl.threeimgtoexcel('./sources/' + 'cv2_img_salt_median', mat, salt_after, cv2_img_salt_median)
+        '''
+        SMF - PSNR
+        '''
+        psnr = ms.PSNR(mat, cv2_img_salt_median)
+        print('cv_median_psnr={}\n'.format(psnr))
+
+        '''
+        SMF - SSIM
+        '''
+        ssim = ms.compute_ssim(mat, cv2_img_salt_median)
+        print('cv_median_ssim={}\n'.format(ssim))
+
         io.showImg('cv2_salt_median', cv2_img_salt_median)
 
     def test_salt_noise_2020_foma(self, mat):

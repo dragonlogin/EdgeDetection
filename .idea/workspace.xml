@@ -24,14 +24,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dcf5d11-a181-4244-a873-f70b2f738fdb" name="2020-论文foma算法" comment="">
-      <change afterPath="$PROJECT_DIR$/image/qie.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/image_enhance/t_10_21.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main/sources/t_10_21.xlsx" afterDir="false" />
+    <list default="true" id="6dcf5d11-a181-4244-a873-f70b2f738fdb" name="2020-论文foma算法" comment="2020-论文foma算法">
+      <change afterPath="$PROJECT_DIR$/main/sources/path1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main/sources/path2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_enhance/enhance_unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_enhance/enhance_unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_enhance/ima_enhance.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_enhance/ima_enhance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/image_enhance/paper.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_enhance/paper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/add_noise/add_noise.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions/add_noise/add_noise.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/measure_method/measure.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions/measure_method/measure.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/main2.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/main2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/sources/salt_after.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/main/sources/salt_after.xlsx" afterDir="false" />
     </list>
@@ -101,28 +99,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main2">
-    <configuration name="image_enhance_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="NlEdgeDetection" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/image_enhance" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/image_enhance/image_enhance_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="image_path" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NlEdgeDetection" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -159,6 +135,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main/main2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="measure" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NlEdgeDetection" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/functions/measure_method" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/functions/measure_method/measure.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -214,10 +212,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main2" />
+        <item itemvalue="Python.measure" />
         <item itemvalue="Python.paper" />
         <item itemvalue="Python.t_10_21" />
         <item itemvalue="Python.image_path" />
-        <item itemvalue="Python.image_enhance_test" />
       </list>
     </recent_temporary>
   </component>
@@ -227,7 +225,6 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="" name="Default Changelist" comment="" />
       <changelist id="04456fe0-ec0c-4680-8c32-ba0a4a8651f6" name="Revert: 边缘检测" comment="" />
       <changelist id="6dcf5d11-a181-4244-a873-f70b2f738fdb" name="2020-论文foma算法" comment="" />
       <created>1600651722339</created>
@@ -261,7 +258,9 @@
       <workItem from="1603365205514" duration="2484000" />
       <workItem from="1603413755504" duration="18785000" />
       <workItem from="1603631366035" duration="2123000" />
-      <workItem from="1603672703524" duration="6574000" />
+      <workItem from="1603672703524" duration="9954000" />
+      <workItem from="1603701408278" duration="6220000" />
+      <workItem from="1603758057466" duration="3652000" />
     </task>
     <task id="LOCAL-00001" summary="边缘检测">
       <created>1600777170381</created>
@@ -368,7 +367,21 @@
       <option name="project" value="LOCAL" />
       <updated>1603679761946</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="2020-论文foma算法">
+      <created>1603680354324</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1603680354324</updated>
+    </task>
+    <task id="LOCAL-00017" summary="F score边缘检测质量评价指标">
+      <created>1603680826301</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1603680826301</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -429,29 +442,30 @@
     <MESSAGE value="改进中值滤波" />
     <MESSAGE value="wanfeng’s paper" />
     <MESSAGE value="2020-论文foma算法" />
-    <option name="LAST_COMMIT_MESSAGE" value="2020-论文foma算法" />
+    <MESSAGE value="F score边缘检测质量评价指标" />
+    <option name="LAST_COMMIT_MESSAGE" value="F score边缘检测质量评价指标" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="632" y="80" key="CommitChangelistDialog2" timestamp="1603679966357">
+    <state x="632" y="80" key="CommitChangelistDialog2" timestamp="1603680825151">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="632" y="80" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1603679966357" />
-    <state width="1554" height="180" key="GridCell.Tab.0.bottom" timestamp="1603679791291">
+    <state x="632" y="80" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1603680825151" />
+    <state width="1824" height="341" key="GridCell.Tab.0.bottom" timestamp="1603761034348">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1554" height="180" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1603679791291" />
-    <state width="1554" height="180" key="GridCell.Tab.0.center" timestamp="1603679791290">
+    <state width="1824" height="341" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1603761034348" />
+    <state width="1824" height="341" key="GridCell.Tab.0.center" timestamp="1603761034348">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1554" height="180" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1603679791290" />
-    <state width="1554" height="180" key="GridCell.Tab.0.left" timestamp="1603679791290">
+    <state width="1824" height="341" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1603761034348" />
+    <state width="1824" height="341" key="GridCell.Tab.0.left" timestamp="1603761034347">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1554" height="180" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1603679791290" />
-    <state width="1554" height="180" key="GridCell.Tab.0.right" timestamp="1603679791291">
+    <state width="1824" height="341" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1603761034347" />
+    <state width="1824" height="341" key="GridCell.Tab.0.right" timestamp="1603761034348">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1554" height="180" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1603679791291" />
+    <state width="1824" height="341" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1603761034348" />
     <state width="1554" height="339" key="GridCell.Tab.1.bottom" timestamp="1603459831313">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -476,18 +490,18 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="880" y="437" key="VCS.ChangelistChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1603680204284" />
-    <state x="626" y="260" key="Vcs.Push.Dialog.v2" timestamp="1603680232401">
+    <state x="626" y="260" key="Vcs.Push.Dialog.v2" timestamp="1603680861994">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="626" y="260" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1603680232401" />
+    <state x="626" y="260" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1603680861994" />
     <state x="897" y="371" key="cloudConfig.SelfSettingsDialog" timestamp="1602206263377">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="897" y="371" key="cloudConfig.SelfSettingsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1602206263377" />
-    <state x="697" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1603177295277">
+    <state x="697" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1603682370530">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="697" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1603177295277" />
+    <state x="697" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1603682370530" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -512,6 +526,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NlEdgeDetection$paper.coverage" NAME="paper Coverage Results" MODIFIED="1603677288175" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/image_enhance" />
+    <SUITE FILE_PATH="coverage/NlEdgeDetection$measure.coverage" NAME="measure Coverage Results" MODIFIED="1603706353557" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/functions/measure_method" />
     <SUITE FILE_PATH="coverage/NlEdgeDetection$t_10_21.coverage" NAME="t_10_21 Coverage Results" MODIFIED="1603444393872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/image_enhance" />
     <SUITE FILE_PATH="coverage/NlEdgeDetection$ima_enhance__1_.coverage" NAME="ima_enhance (1) Coverage Results" MODIFIED="1602208763475" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/image_enhance" />
     <SUITE FILE_PATH="coverage/NlEdgeDetection$image_enhance.coverage" NAME="image_enhance Coverage Results" MODIFIED="1602208713887" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/image_enhance" />
@@ -519,7 +534,7 @@
     <SUITE FILE_PATH="coverage/NlEdgeDetection$main.coverage" NAME="main Coverage Results" MODIFIED="1600823117922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/EdgeDetection$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1600850101258" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/NlEdgeDetection$image_enhance_test.coverage" NAME="image_enhance_test Coverage Results" MODIFIED="1602224722798" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/image_enhance" />
-    <SUITE FILE_PATH="coverage/NlEdgeDetection$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1603677998225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
+    <SUITE FILE_PATH="coverage/NlEdgeDetection$main2.coverage" NAME="main2 Coverage Results" MODIFIED="1603761034341" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/main" />
     <SUITE FILE_PATH="coverage/NlEdgeDetection$image_path.coverage" NAME="image_path Coverage Results" MODIFIED="1602229304743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/read_image" />
     <SUITE FILE_PATH="coverage/NlEdgeDetection$enhance_unit.coverage" NAME="enhance_unit Coverage Results" MODIFIED="1602208656092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/image_enhance" />
   </component>
