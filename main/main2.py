@@ -5,13 +5,15 @@ from read_image.image_path import  image_path
 from image_enhance.ima_enhance import ima_enhance
 from tools.tools import tools
 from functions.add_noise.add_noise import add_noise
-from image_enhance.paper import paper
+# from image_enhance.paper import paper
 from functions.measure_method.measure import measure
 from image_enhance.t_10_21 import TL
+from image_enhance.paper_compare import paper_compare
+pc = paper_compare()
 ta = TL()
 ms = measure()
-from image_enhance.paper import paper_foma
-foma = paper_foma()
+# from image_enhance.paper import paper_foma
+# foma = paper_foma()
 import numpy as np
 an = add_noise()
 import cv2
@@ -21,7 +23,7 @@ inter = interference()
 io = img_operator()
 igpath = image_path()
 tl = tools()
-pp = paper()
+# pp = paper()
 class main2(object):
 
     # 获取输入图像
@@ -96,88 +98,37 @@ class main2(object):
         #     gray = r_mat2
         # io.showImg('gaussian_median', r_mat2)
 
-    def test_salt_noise_wanfengfeng(self, mat, num=1):
+    def test_salt_noise_different_paper(self, mat, num=1):
         # gray = an.addSaltNoise(mat, 0.9)
         # gray = an.sp_noise(mat, 0.05)
-        gray = an.salt_and_pepper_noise(mat, 0.05)
+        noise_mat = an.salt_and_pepper_noise(mat, 0.1)
         # salt_after = gray - mat
-        salt_after = gray
+        # salt_after = gray
         # tl.twoimgtoexcel('./sources/' + 'salt_after', mat, salt_after)
-        cv2.imshow('origin_salt_noise', gray)
+        cv2.imshow('origin_salt_noise', noise_mat)
 
         '''
         万丰丰论文
         '''
-        wf_blur = pp.wanfeng(gray, 10, 30)
-        cv2.imshow('wf_blur', wf_blur)
-
-        '''
-        wff - PSNR
-        '''
-        psnr = ms.PSNR(mat, wf_blur)
-        print('wf_psnr={}\n'.format(psnr))
-
-        '''
-        wff - SSIM
-        '''
-        ssim = ms.compute_ssim(mat, wf_blur)
-        print('wff_ssim={}\n'.format(ssim))
+        # wf_blur = pp.wanfeng(noise_mat, 10, 30)
+        # cv2.imshow('wf_blur', wf_blur)
+        pc.test_salt_noise_wanfengfeng(mat, noise_mat)
 
         '''
         2020-foma论文
         '''
-        foma_blur = foma.foma(gray)
-        cv2.imshow('foma_blur', foma_blur)
-        '''
-        foma-PSNR
-        '''
-        psnr = ms.PSNR(foma_blur, mat)
-        print('foma_psnr={}\n'.format(psnr))
-
-        '''
-        foma-SSIM
-        '''
-        ssim = ms.compute_ssim(mat, foma_blur)
-        print('foma_ssim={}\n'.format(ssim))
+        pc.test_salt_noise_foma(mat, noise_mat)
 
         '''
         SMF
         '''
-        cv2_img_salt_median = cv2.medianBlur(gray, 3)
-        # tl.threeimgtoexcel('./sources/' + 'cv2_img_salt_median', mat, salt_after, cv2_img_salt_median)
-        '''
-        SMF - PSNR
-        '''
-        psnr = ms.PSNR(mat, cv2_img_salt_median)
-        print('cv_median_psnr={}\n'.format(psnr))
+        pc.test_salt_noise_smf(mat, noise_mat)
 
         '''
-        SMF - SSIM
+        2011- mdbutm论文
         '''
-        ssim = ms.compute_ssim(mat, cv2_img_salt_median)
-        print('cv_median_ssim={}\n'.format(ssim))
+        pc.test_salt_noise_mdbutm(mat, noise_mat)
 
-        io.showImg('cv2_salt_median', cv2_img_salt_median)
-
-    def test_salt_noise_2020_foma(self, mat):
-        gray = an.addSaltNoise(mat, 0.4)
-        # salt_after = gray - mat
-        salt_after = gray
-        # tl.twoimgtoexcel('./sources/' + 'salt_after', mat, salt_after)
-        cv2.imshow('origin_salt_noise', gray)
-
-        '''
-        2020-foma论文
-        '''
-        foma_blur = foma.foma(mat)
-        cv2.imshow('foma_blur', foma_blur)
-
-        '''
-        SMF
-        '''
-        cv2_img_salt_median = cv2.medianBlur(gray, 5)
-        # tl.threeimgtoexcel('./sources/' + 'cv2_img_salt_median', mat, salt_after, cv2_img_salt_median)
-        io.showImg('cv2_salt_median', cv2_img_salt_median)
 
     def test_gaussian_noise(self, mat, num = 1):
 
@@ -246,9 +197,9 @@ if __name__ == '__main__':
 
     # obj.test_salt_noise(ori_mat, 1)
     '''
-        万丰丰论文实现
+        论文比较方法实现
     '''
-    obj.test_salt_noise_wanfengfeng(ori_mat)
+    obj.test_salt_noise_different_paper(ori_mat)
 
     '''
     2020-foma 论文实现

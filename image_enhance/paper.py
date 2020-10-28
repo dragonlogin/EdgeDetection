@@ -1,6 +1,6 @@
 import numpy as np
 import math
-class paper(object):
+class paper_wff(object):
 
    def __init__(self):
         pass
@@ -352,8 +352,80 @@ class paper_foma(object):
 
 
 # paper_foma().test_foma()
+class MDBUTM_2011(object):
+    def init(self):
+        pass
 
 
+    def is_noisy(self, val):
+        return True if 0 < val < 255 else False
+
+    '''
+    此方法前提是mat3中心是噪声，然后用返回值替换
+    '''
+    def replace_val(self, mat3):
+        h, w = mat3.shape
+
+        cnt, ls = 0, []
+        for i in range(h):
+            for j in range(w):
+                val = mat3[i, j]
+
+                if self.is_noisy(val) == True:
+                    cnt += 1
+                    ls.append(val)
+
+        if cnt == 0:
+            return math.ceil(np.mean(mat3))
+        else:
+            return math.ceil(np.median(np.array(ls)))
+
+
+    '''
+    MDBUTM论文方法处理整副图像
+    '''
+    def mdbutm(self, mat):
+        h, w = mat.shape
+        ret_mat = mat.copy()
+
+        for i in range(1, h - 1):
+            for j in range(1, w - 1):
+                val = mat[i, j]
+
+                if self.is_noisy(val) == True:
+                    continue
+
+                mat3 = mat[i - 1 : i + 2, j - 1 : j + 2]
+                ret_mat[i, j] = self.replace_val(mat3)
+
+        return ret_mat
+
+
+
+    def test_mdbutm(self):
+        mat = np.array([
+            [0, 255, 0],
+            [0, 255, 255],
+            [255, 0, 255]
+        ])
+        mat = np.array([
+            [78, 90, 0],
+            [120, 0, 255],
+            [97, 255, 73]
+        ])
+        mat = np.array([
+            [43, 67, 70],
+            [55, 90, 79],
+            [85, 81, 66]
+        ])
+
+        print('mat = \n{}\n'.format(mat))
+        self.mdbutm(mat)
+        print('mdbutm_mat = \n{}\n'.format(mat))
+
+
+
+# MDBUTM_2011().test_mdbutm()
 
 
 

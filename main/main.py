@@ -852,7 +852,7 @@ test = DDTest()
 # test.center_sho_5_13_test()
 # test.new_think3(25)
 
-test.new_think2(11)
+# test.new_think2(11)
 
 # test.show_diff(10)
 # test.twoDataHist()
