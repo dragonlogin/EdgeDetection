@@ -1,5 +1,5 @@
 import numpy as np
-import math
+import math, cv2
 class paper_wff(object):
 
    def __init__(self):
@@ -426,6 +426,185 @@ class MDBUTM_2011(object):
 
 
 # MDBUTM_2011().test_mdbutm()
+
+class PDBM_2016(object):
+    def init(self):
+        pass
+
+    '''
+    返回 mat3 中非噪声点的 list
+    '''
+    def SNF(self, mat):
+        ls = []
+        # mat = np.array(mat)
+        h, w = mat.shape
+
+        for i in range(h):
+            for j in range(w):
+                val = mat[i, j]
+                if val in [0, 255]:
+                    ls.append(val)
+
+        return ls
+
+    '''
+        返回 ls 中的中位数
+    '''
+    def TM(self, ls):
+        if len(ls) == 0:
+            return -1;
+        else:
+            return math.ceil(np.median(np.array(ls)))
+
+    '''
+    噪声密度 <= 50%,使用该算法
+    '''
+    def pro_1(self, noise_mat):
+        # init
+        ret_mat = noise_mat.copy()
+        lpp = noise_mat[1, 1]
+
+        h, w = noise_mat.shape
+        for i in range(1, h - 1):
+            for j in range(1, w - 1):
+                val = noise_mat[i, j]
+                if val in [0, 255]:
+                    mat3 = noise_mat[i - 1 : i + 2, j - 1 : j + 2]
+                    ls = self.SNF(mat3)
+
+                    if len(ls) > 0:
+                        ret_mat[i, j] = self.TM(ls)
+                    else:
+                        ret_mat[i, j] = lpp
+
+                    noise_mat[i, j] = ret_mat[i, j]
+                    lpp = ret_mat[i, j]
+
+        return ret_mat
+
+    def PM(self, mat):
+        a = np.sort(mat, axis=1)
+        b = np.sort(a, axis=0)
+        return b[mat.shape[0] // 2, mat.shape[1] // 2]
+
+    '''
+        噪声密度 > 50%， 使用该算法
+    '''
+
+
+    def pro_2(self, noise_mat):
+        # init
+        ww, wm = 1, 12
+        ret_mat = noise_mat.copy()
+        lpp = noise_mat[1, 1]
+        h, w = noise_mat.shape
+
+        for i in range(1, h - 1):
+            for j in range(1, w - 1):
+                val = noise_mat[i, j]
+                if val not in [0, 255]:
+                    continue
+
+                flag = True
+                while (ww <= wm):
+                    if i - ww < 0 or i + ww >= h or j - ww < 0 or j + ww >= w:
+                        flag = False
+                        break
+                    mat_w = noise_mat[i - ww: i + ww + 1, j - ww: j + ww + 1]
+                    ls = self.SNF(mat_w)
+                    pm = self.PM(mat_w)
+                    if pm not in [0, 255]:
+                        ret_mat[i, j] = pm
+                        break
+                    elif ls:
+                        ret_mat[i, j] = self.TM(ls)
+                        break
+                    else:
+                        ww += 1
+                    if (ww > wm):
+                        flag = False
+                        break
+
+                if flag == False:
+                    ret_mat[i, j] = lpp
+
+                lpp = ret_mat[i, j]
+
+        return ret_mat
+
+    def MF_3(self, noise_mat):
+        ret_mat = cv2.blur(noise_mat, (3, 3))
+        return ret_mat
+
+    def pdbm(self, mat):
+        h, w = mat.shape
+        ret_mat = mat.copy()
+        cnt = 0
+
+        for i in range(h):
+            for j in range(w):
+                val = mat[i, j]
+                if val in [0, 255]:
+                    cnt += 1
+dat = self.pro_1(mat)
+        else:
+        nd = cnt * 1.0 / h / w
+        eps = 0.0000001
+
+        if nd - 0.5 <= eps:
+            ret_m
+            ret_mat = self.pro_2(mat)
+
+        ret_mat = self.MF_3(ret_mat)
+
+        return ret_mat
+
+
+
+
+
+
+    def test_PM(self):
+        mat3 = np.array([
+            [148, 155, 0],
+            [153, 155, 255],
+            [154, 255, 150]
+        ])
+        mat3 = np.array([
+            [0, 0, 159],
+            [255, 0, 255],
+            [150, 0, 0]
+        ])
+        mat3 = np.array([
+            [0, 0, 0],
+            [0, 255, 0],
+            [255, 255, 0]
+        ])
+
+        mat3 = np.array([
+            [255, 152, 0, 255, 0],
+            [0, 0, 0, 0, 0],
+            [255, 0, 255, 0, 255],
+            [148, 255, 255, 0, 0],
+            [0, 0, 0, 255, 255]
+        ])
+
+        ret = self.pdbm(mat3)
+        print(ret)
+
+    def test_SNF(self):
+        mat3 = np.array([
+            [0, 0, 159],
+            [255, 0, 255],
+            [150, 0, 0]
+        ])
+        if self.SNF(mat3):
+            print(True)
+        else:
+            print(False)
+PDBM_2016().test_PM()
+# PDBM_2016().test_SNF()
+
 
 
 

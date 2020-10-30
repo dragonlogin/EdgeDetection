@@ -4,7 +4,8 @@ from functions.measure_method.measure import measure
 from image_enhance.paper import paper_wff
 from image_enhance.paper import paper_foma
 from image_enhance.paper import MDBUTM_2011
-
+from image_enhance.paper import PDBM_2016
+pdbm = PDBM_2016()
 mdb = MDBUTM_2011()
 foma = paper_foma()
 an = add_noise()
@@ -88,5 +89,23 @@ class paper_compare(object):
         '''
         ssim = ms.compute_ssim(mat, mdb_blur)
         print('mdbutm_ssim={}\n'.format(ssim))
+
+    def test_salt_noise_pdbm(self, mat, noise_mat):
+        '''
+        PDBM_2016
+        '''
+        pdbm_blur = pdbm.pdbm(noise_mat)
+        cv2.imshow('pdbm_blur',  pdbm_blur)
+        '''
+        PDBM-2016 - PSNR
+        '''
+        psnr = ms.PSNR(mat, pdbm_blur)
+        print('pdbm_psnr={}\n'.format(psnr))
+
+        '''
+        PDBM_2011 - SSIM
+        '''
+        ssim = ms.compute_ssim(mat, pdbm_blur)
+        print('pdbm_ssim={}\n'.format(ssim))
 
 

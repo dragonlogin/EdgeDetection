@@ -129,6 +129,11 @@ class main2(object):
         '''
         pc.test_salt_noise_mdbutm(mat, noise_mat)
 
+        '''
+            2016- PDBM论文
+        '''
+        pc.test_salt_noise_pdbm(mat, noise_mat)
+
 
     def test_gaussian_noise(self, mat, num = 1):
 
